@@ -53,7 +53,7 @@ const quizData = {
         C: "Windows Server 2012 R2 Essentials",
         D: "Windows Server 2012 R2 Foundation",
       },
-      correct: "C",
+      correct: "D",
     },
     {
       question:
@@ -517,7 +517,7 @@ const quizData = {
         C: "start /w ocsetup Microsoft-Hyper-V",
         D: "start /w ocsetup hyper-v",
       },
-      correct: "B",
+      correct: "C",
     },
     {
       question: `Câu 48 (Hyper-V 18): Bạn có thể cài đặt Hyper-V Manager MMC trên những hệ điều hành nào?
@@ -588,7 +588,7 @@ Hành động nào sau đây đáp ứng các yêu cầu này?
         C: "Gán User Rights Assignment bằng Local Group Policy Editor",
         D: "Gán Role Assignment bằng Authorization Manager",
       },
-      correct: "C",
+      correct: "A",
     },
     {
       question:
@@ -628,7 +628,7 @@ Hành động nào sau đây đáp ứng các yêu cầu này?
         C: "1, 2 và 3",
         D: "1, 2, 3 và 4",
       },
-      correct: "C",
+      correct: "D",
     },
     {
       question:
@@ -1033,7 +1033,7 @@ Crystal nên thực hiện các bước nào sau đây để đáp ứng các y�
         C: "Hyper-V edition",
         D: "Datacenter",
       },
-      correct: "C",
+      correct: "A",
     },
     {
       question:
@@ -1057,7 +1057,7 @@ Crystal nên thực hiện các bước nào sau đây để đáp ứng các y�
       question:
         "Câu 6 (NLB 6): NLB với unicast, số lượng card mạng tối thiểu trong mỗi nút?",
       options: { A: "1", B: "2", C: "3", D: "6" },
-      correct: "B",
+      correct: "A",
     },
     {
       question:
@@ -1082,9 +1082,15 @@ Crystal nên thực hiện các bước nào sau đây để đáp ứng các y�
       correct: "B",
     },
     {
-      question: "Câu 10 (CA 10): Ghi lại các sửa đổi cấu hình CA.",
+      question: `Câu 10 (CA 10): Công ty ABC Industries muốn các sửa đổi cấu hình của dịch vụ vai trò Certification Authority được ghi lại. Bạn sẽ triển khai điều này như thế nào? 
+  1.Bạn nên xem xét bật kiểm toán các sự kiện hệ thống.
+  2.Bạn nên xem xét bật ghi nhật ký.
+  3.Bạn nên xem xét bật kiểm toán truy cập đối tượng.
+  4.Bạn nên xem xét bật kiểm toán sử dụng đặc quyền.
+  5.Bạn nên xem xét bật kiểm toán theo dõi tiến trình. 
+`,
       options: { A: "1,3", B: "2,3", C: "4,3", D: "5,3" },
-      correct: "A",
+      correct: "B",
     },
     {
       question:
@@ -1128,7 +1134,7 @@ Crystal nên thực hiện các bước nào sau đây để đáp ứng các y�
         C: "SSL cert",
         D: "Chứng chỉ Ký mã thông báo (Token Signing certificate)",
       },
-      correct: "D",
+      correct: "A",
     },
     {
       question:
@@ -1577,7 +1583,7 @@ Những người dùng được kết nối với DNS2 cần có thể truy cậ
   5.Từ Trình quản lý Máy chủ, cài đặt dịch vụ vai trò Máy chủ Chính sách Mạng. 
 `,
       options: { A: "1,2", B: "2,3", C: "2,4", D: "2,5" },
-      correct: "C",
+      correct: "B",
     },
     {
       question: `Câu 28 (Security 28): Bạn là quản trị viên của một tổ chức lớn chứa một miền Active Directory có tên là Stellacon.com. Miền này chứa một máy chủ có tên là ServerA chạy Windows Server 2012 R2. ServerA đã cài đặt vai trò máy chủ Dịch vụ Chính sách và Truy cập Mạng. Chính sách bảo mật của công ty bạn yêu cầu rằng xác thực dựa trên chứng chỉ phải được sử dụng bởi một số dịch vụ mạng. Bạn cần xác định phương pháp xác thực Máy chủ Chính sách Mạng (NPS) nào tuân thủ chính sách bảo mật. Bạn nên xác định hai phương pháp xác thực nào? (Chọn hai.)
@@ -1656,7 +1662,7 @@ Những người dùng được kết nối với DNS2 cần có thể truy cậ
         C: "System Configuration.",
         D: "Startup Repair.",
       },
-      correct: "B",
+      correct: "A",
     },
     {
       question: "Câu 5 (Troubleshoot 5): SCSI driver update failed boot.",
@@ -1773,8 +1779,12 @@ Những người dùng được kết nối với DNS2 cần có thể truy cậ
       correct: "D",
     },
     {
-      question:
-        "Câu 16 (Replication 16): Giao thức truyền sao chép qua Internet, không đáng tin cậy.",
+      question: `Câu 16 (Replication 16): .Bạn đã cấu hình môi trường Active Directory của mình với nhiều trang và đã đặt các tài nguyên thích hợp vào mỗi trang. Bây giờ bạn đang cố gắng chọn một giao thức để truyền thông tin sao chép giữa hai trang. Kết nối giữa hai trang có các đặc điểm sau:
+  Liên kết thường không khả dụng trong một số thời điểm nhất định trong ngày do nhà cung cấp mạng không đáng tin cậy.
+  Việc truyền sao chép phải được thử cho dù liên kết có khả dụng hay không. Nếu liên kết không khả dụng trong quá trình sao chép theo lịch trình, thông tin sẽ tự động được nhận sau khi liên kết khả dụng trở lại.
+  Lưu lượng sao chép phải có khả năng đi qua một kết nối Internet tiêu chuẩn.
+  Giao thức nào sau đây đáp ứng các yêu cầu này? 
+`,
       options: { A: "IP", B: "SMTP", C: "RPC", D: "DHCP" },
       correct: "B",
     },
@@ -1994,13 +2004,19 @@ Hai trong số các bước nào sau đây Christina có thể thực hiện đ�
       correct: "D",
     },
     {
-      question: "Câu 18 (IPv6 18): Địa chỉ FE80::... (Link-local, EUI-64).",
+      question: `Câu 18 (IPv6 18): : Bạn yêu cầu một trong những kỹ thuật viên của mình lấy địa chỉ IPv6 của một máy Windows Server 2012 R2 mới, và cô ấy đưa cho bạn một ghi chú có FE80::0203:FFFF:FE11:2CD trên đó. Bạn có thể biết được gì từ địa chỉ này? 
+  1.Đây là một địa chỉ IPv6 duy nhất toàn cục.
+  2.Đây là một địa chỉ IPv6 liên kết cục bộ.
+  3.Đây là một địa chỉ IPv6 đa hướng.
+  4.Ở định dạng EUI-64, bạn có thể thấy địa chỉ MAC của nút.
+  5.Ở định dạng EUI-64, bạn có thể thấy địa chỉ IPv4 của nút.
+`,
       options: { A: "1,2", B: "3,4", C: "4,5", D: "2,4" },
       correct: "D",
     },
     {
       question:
-        "Câu 19 (File 19): Chia sẻ không hiển thị với người dùng (NET USE hoạt động).",
+        "Câu 19 (File 19): : Công ty mà bạn làm việc có một nhóm quản trị đa cấp được phân chia theo phòng ban và địa điểm. Có bốn địa điểm chính, và bạn thuộc nhóm Đông Bắc. Bạn đã được chỉ định vào nhóm quản trị chịu trách nhiệm tạo và duy trì các chia sẻ mạng cho tệp và máy in trong khu vực của bạn. Nơi làm việc cuối cùng của bạn là một mạng Windows Server 2008 lớn, nơi bạn có nhiều trách nhiệm hơn. Bạn rất hào hứng với cơ hội tìm hiểu thêm về Windows Server 2012 R2. Đối với nhiệm vụ đầu tiên, bạn đã được cung cấp một danh sách các tệp và máy in chia sẻ cần được tạo cho người dùng trong khu vực của bạn. Bạn hỏi cách tạo chúng trong Windows Server 2012 R2, và bạn được cho biết rằng quy trình tạo chia sẻ giống như với Windows Server 2008. Bạn tạo các chia sẻ và sử dụng NET USE để kiểm tra chúng. Mọi thứ có vẻ hoạt động tốt, vì vậy bạn gửi một tin nhắn rằng các chia sẻ đã có sẵn. Ngày hôm sau, bạn bắt đầu nhận được các cuộc gọi từ người dùng nói rằng họ không thể thấy bất kỳ tài nguyên nào bạn đã tạo. Lý do có khả năng nhất cho các cuộc gọi từ người dùng là gì?",
       options: {
         A: "NetBIOS.",
         B: "Bạn cần xuất bản các chia sẻ trong thư mục.",
@@ -2040,7 +2056,8 @@ Isabel nên thực hiện các bước nào sau đây để đáp ứng các yê
       correct: "D",
     },
     {
-      question: "Câu 22 (BranchCache 22): Tải trước dữ liệu FS01 sang FS02.",
+      question:
+        "Câu 22 (BranchCache 22): Công ty của bạn có trụ sở chính tại Colorado Springs và có một địa điểm trang web từ xa ở Tampa. Văn phòng Colorado Spring có một máy chủ tệp tên là FS01. FS01 đã cài đặt dịch vụ vai trò BranchCache cho Tệp Mạng. Văn phòng Tampa của bạn có một máy chủ tệp tên là FS02. FS02 đã được cấu hình làm máy chủ bộ đệm ẩn được lưu trữ BranchCache. Bạn cần tải trước dữ liệu từ các chia sẻ tệp trên FS01 vào bộ đệm ẩn trên FS02. Bạn đã tạo các hàm băm cho các chia sẻ tệp trên FS01. Bạn nên chạy cmdlet nào tiếp theo?",
       options: {
         A: "Export-BCCachePackage",
         B: "Publish-BCFileContent",

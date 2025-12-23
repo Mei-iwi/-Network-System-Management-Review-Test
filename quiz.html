@@ -33,11 +33,24 @@
       let correctCount = 0;
       let time = 0;
       let timer = null;
-
       function startTimer() {
         timer = setInterval(() => {
           time++;
-          document.getElementById("timer").innerText = `⏱ Thời gian: ${time}s`;
+
+          const hours = Math.floor(time / 3600);
+          const minutes = Math.floor((time % 3600) / 60);
+          const seconds = time % 60;
+
+          const formattedTime =
+            String(hours).padStart(2, "0") +
+            ":" +
+            String(minutes).padStart(2, "0") +
+            ":" +
+            String(seconds).padStart(2, "0");
+
+          document.getElementById(
+            "timer"
+          ).innerText = `⏱ Thời gian: ${formattedTime}`;
         }, 1000);
       }
 
