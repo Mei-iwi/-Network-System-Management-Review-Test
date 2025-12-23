@@ -5,111 +5,138 @@
     <title>Trắc nghiệm</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <p id="timer">⏱ Thời gian: 0s</p>
+    <p id="timer">⏱ Thời gian: 00:00:00</p>
     <p id="score">Đúng: 0 / 0</p>
 
     <div class="quiz-container">
       <h2 id="q-number"></h2>
       <p id="question"></p>
-
       <form id="options"></form>
-
-      <p id="answer" class="answer hidden"></p>
+      <p id="answer" class="hidden"></p>
     </div>
+
     <div class="controls">
       <button onclick="goHome()">🏠 Trang chủ</button>
+
       <button onclick="prevQuestion()">⬅ Quay lại</button>
       <button onclick="checkAnswer()">✔ Xác nhận</button>
       <button onclick="nextQuestion()">➡ Tiếp</button>
+      <button id="reviewBtn" onclick="startReview()" disabled>
+        🔁 Ôn tập câu sai
+      </button>
+      <button id="backBtn" onclick="backToQuiz()" class="hidden">
+        🔙 Quay lại bài làm
+      </button>
     </div>
+
     <script src="data.js"></script>
     <script>
+      /* ===== BIẾN ===== */
+      const allQuestions = [...quizData.all];
+      let questions = [];
       let index = 0;
-      const questions = quizData.all;
 
-      let answered = Array(questions.length).fill(false);
-      let userAnswers = Array(questions.length).fill(null);
+      let answered = [];
+      let userAnswers = [];
       let correctCount = 0;
+      let wrongQuestions = [];
+
+      let reviewMode = false;
+
       let time = 0;
       let timer = null;
+
+      /* ===== SHUFFLE ===== */
+      function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+      }
+
+      shuffle(allQuestions);
+      questions = [...allQuestions];
+
+      answered = Array(questions.length).fill(false);
+      userAnswers = Array(questions.length).fill(null);
+
+      /* ===== TIMER ===== */
       function startTimer() {
         timer = setInterval(() => {
           time++;
-
-          const hours = Math.floor(time / 3600);
-          const minutes = Math.floor((time % 3600) / 60);
-          const seconds = time % 60;
-
-          const formattedTime =
-            String(hours).padStart(2, "0") +
-            ":" +
-            String(minutes).padStart(2, "0") +
-            ":" +
-            String(seconds).padStart(2, "0");
-
+          const h = String(Math.floor(time / 3600)).padStart(2, "0");
+          const m = String(Math.floor((time % 3600) / 60)).padStart(2, "0");
+          const s = String(time % 60).padStart(2, "0");
           document.getElementById(
             "timer"
-          ).innerText = `⏱ Thời gian: ${formattedTime}`;
+          ).innerText = `⏱ Thời gian: ${h}:${m}:${s}`;
         }, 1000);
       }
 
+      /* ===== RENDER ===== */
       function render() {
         const q = questions[index];
 
-        document.getElementById("q-number").innerText = `Câu ${index + 1} / ${
-          questions.length
-        }`;
+        document.getElementById("q-number").innerText = reviewMode
+          ? `Ôn tập câu sai: ${index + 1}/${questions.length}`
+          : `Câu ${index + 1}/${questions.length}`;
+
         document.getElementById("question").innerText = q.question;
 
         const optDiv = document.getElementById("options");
         optDiv.innerHTML = "";
 
         for (let k in q.options) {
-          const disabled = answered[index] ? "disabled" : "";
-          const checked = userAnswers[index] === k ? "checked" : "";
-
           optDiv.innerHTML += `
-                  <label class="option">
-                      <input type="radio" name="opt" value="${k}" ${checked} ${disabled}>
-                      ${k}. ${q.options[k]}
-                  </label>`;
+          <label class="option">
+            <input type="radio" name="opt" value="${k}"
+              ${userAnswers[index] === k ? "checked" : ""}
+              ${answered[index] && !reviewMode ? "disabled" : ""}>
+            ${k}. ${q.options[k]}
+          </label>`;
         }
 
         document.getElementById("answer").classList.add("hidden");
-        document.getElementById(
-          "score"
-        ).innerText = `Đúng: ${correctCount} / ${questions.length}`;
+
+        document.getElementById("score").innerText = reviewMode
+          ? `Ôn tập: ${questions.length} câu`
+          : `Đúng: ${correctCount}/${allQuestions.length}`;
       }
 
+      /* ===== CHECK ===== */
       function checkAnswer() {
-        if (answered[index]) return;
+        if (!reviewMode && answered[index]) return;
 
-        const q = questions[index];
-        const radios = document.querySelectorAll('input[name="opt"]');
+        const radios = document.querySelectorAll("input[name='opt']");
         let selected = null;
-
         radios.forEach((r) => {
           if (r.checked) selected = r.value;
         });
 
         if (!selected) return alert("Bạn chưa chọn đáp án!");
 
-        answered[index] = true;
-        userAnswers[index] = selected;
+        const q = questions[index];
 
-        if (selected === q.correct) correctCount++;
+        if (!reviewMode) {
+          answered[index] = true;
+          userAnswers[index] = selected;
 
-        document
-          .querySelectorAll(".option")
-          .forEach((o) => o.classList.remove("correct", "wrong"));
+          if (selected === q.correct) {
+            correctCount++;
+          } else {
+            if (!wrongQuestions.includes(q)) {
+              wrongQuestions.push(q);
+            }
+            document.getElementById("reviewBtn").disabled = false;
+          }
+        }
 
         radios.forEach((r) => {
           const label = r.parentElement;
-
           if (r.value === q.correct) label.classList.add("correct");
           if (r.checked && r.value !== q.correct) label.classList.add("wrong");
-
           r.disabled = true;
         });
 
@@ -117,14 +144,9 @@
           "answer"
         ).innerHTML = `Đáp án đúng: <b>${q.correct}</b>`;
         document.getElementById("answer").classList.remove("hidden");
-
-        document.getElementById(
-          "score"
-        ).innerText = `Đúng: ${correctCount} / ${questions.length}`;
-
-        if (answered.every((a) => a)) finishQuiz();
       }
 
+      /* ===== NAV ===== */
       function nextQuestion() {
         if (index < questions.length - 1) {
           index++;
@@ -139,15 +161,30 @@
         }
       }
 
-      function finishQuiz() {
-        clearInterval(timer);
-        alert(
-          `🎉 Hoàn thành!\n` +
-            `✔ Đúng: ${correctCount}/${questions.length}\n` +
-            `⏱ Thời gian: ${time}s`
-        );
+      /* ===== REVIEW MODE ===== */
+      function startReview() {
+        if (wrongQuestions.length === 0) return;
+
+        reviewMode = true;
+        questions = [...wrongQuestions];
+        index = 0;
+
+        document.getElementById("reviewBtn").classList.add("hidden");
+        document.getElementById("backBtn").classList.remove("hidden");
+
+        render();
       }
 
+      function backToQuiz() {
+        reviewMode = false;
+        questions = [...allQuestions];
+        index = 0;
+
+        document.getElementById("reviewBtn").classList.remove("hidden");
+        document.getElementById("backBtn").classList.add("hidden");
+
+        render();
+      }
       function goHome() {
         if (confirm("Quay về trang chủ? Tiến trình sẽ mất.")) {
           clearInterval(timer);
