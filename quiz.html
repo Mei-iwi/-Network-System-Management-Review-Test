@@ -131,6 +131,11 @@
             }
             document.getElementById("reviewBtn").disabled = false;
           }
+          document.getElementById(
+            "score"
+          ).innerText = `Đúng: ${correctCount} / ${questions.length}`;
+
+          if (answered.every((a) => a)) finishQuiz();
         }
 
         radios.forEach((r) => {
