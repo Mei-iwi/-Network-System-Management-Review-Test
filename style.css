@@ -21,9 +21,13 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 25px;
   }
   .controls {
     display: flex;
+    bottom: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
   }
 }
 
