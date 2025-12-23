@@ -13,6 +13,16 @@ body {
   height: 500px;
 }
 
+@media (max-width: 785px) {
+  .quiz-container {
+    width: 100%;
+    height: auto;
+  }
+  .controls {
+    display: flex;
+  }
+}
+
 #q-number {
   color: #0077cc;
 }
